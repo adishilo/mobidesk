@@ -84,7 +84,9 @@
     "typescript": "^3.7.0"
   },
   "dependencies": {
+    "debug": "^4.1.1",
     "electron-squirrel-startup": "^1.0.0",
+    "file-loader": "^6.0.0",
     "menubar": "^8.0.1"
   }
 }

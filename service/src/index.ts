@@ -1,8 +1,7 @@
-import { app, BrowserWindow, Tray, Menu } from 'electron';
+import { app, BrowserWindow, Tray } from 'electron';
 import { menubar } from "menubar";
-import { AboutAction } from './actions/AboutAction';
+import AppMenu from './AppMenu';
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // const mb = menubar({
 //     index: MAIN_WINDOW_WEBPACK_ENTRY,
@@ -20,17 +19,12 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const createWindow = () => {
     const tray = new Tray('./src/assets/appIcon.png');
-    const contextMenu = Menu.buildFromTemplate([
-        { label: 'Item3', type: 'normal', checked: true },
-        { type: 'separator' },
-        { label: 'About', click: AboutAction.do },
-        { type: 'separator' },
-        { role: 'quit', accelerator: 'cmd+Q' }
-    ]);
-    tray.setContextMenu(contextMenu);
+    let appMenu = new AppMenu(tray);
+
+    appMenu.setMenu();
 
     const mb = menubar({ tray });
-
+    
     mb.on('ready', () => {
         console.log('Menubar app is ready.');
         // your app code here

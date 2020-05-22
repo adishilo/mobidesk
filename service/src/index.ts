@@ -1,6 +1,7 @@
 import { app, BrowserWindow, Tray } from 'electron';
 import { menubar } from "menubar";
-import AppMenu from './AppMenu';
+import AppMenu from './application-menu/AppMenu';
+import { MenuLabelSlot } from "./application-menu/MenuLabelSlot";
 
 
 // const mb = menubar({
@@ -21,7 +22,11 @@ const createWindow = () => {
     const tray = new Tray('./src/assets/appIcon.png');
     let appMenu = new AppMenu(tray);
 
-    appMenu.setMenu();
+    appMenu.registerNotifierLabelSlots(new MenuLabelSlot('battery', 'Battery: 57%'));
+    appMenu.registerNotifierLabelSlots(new MenuLabelSlot('ping', 'Ping: available'));
+    appMenu.registerNotifierLabelSlots(new MenuLabelSlot('llama', 'Llama: Kacha'));
+
+    appMenu.refreshMenu();
 
     const mb = menubar({ tray });
     

@@ -2,7 +2,7 @@ import { app, BrowserWindow, Tray } from 'electron';
 import { menubar } from "menubar";
 import AppMenu from './application-menu/AppMenu';
 import { MenuLabelSlot } from "./application-menu/MenuLabelSlot";
-
+import { SLOT_TYPE_BATTERY_POWER } from '../../common/slot-types';
 
 // const mb = menubar({
 //     index: MAIN_WINDOW_WEBPACK_ENTRY,
@@ -22,9 +22,11 @@ const createWindow = () => {
     const tray = new Tray('./src/assets/appIcon.png');
     let appMenu = new AppMenu(tray);
 
-    appMenu.registerNotifierLabelSlots(new MenuLabelSlot('battery', 'Battery: 57%'));
+    appMenu.registerNotifierLabelSlots(new MenuLabelSlot(SLOT_TYPE_BATTERY_POWER));
     appMenu.registerNotifierLabelSlots(new MenuLabelSlot('ping', 'Ping: available'));
     appMenu.registerNotifierLabelSlots(new MenuLabelSlot('llama', 'Llama: Kacha'));
+
+    // appMenu.registerNotifierLabelSlots(new MenuLabelSlot(SLOT_TYPE_BATTERY_POWER));
 
     appMenu.refreshMenu();
 

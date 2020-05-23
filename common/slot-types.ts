@@ -1,0 +1,1 @@
+export const SLOT_TYPE_BATTERY_POWER='batteryPower';
